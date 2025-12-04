@@ -1,375 +1,188 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Tap In | Melanated in Melbourne</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <style>
-    :root {
-      --card-bg: rgba(12, 7, 18, 0.92);
-      --card-border: rgba(255, 255, 255, 0.2);
-      --text-main: #fdf7ff;
-      --text-muted: #cbb9e5;
-      --accent: #ffd54f;
-      --accent-strong: #ffca28;
-      --danger: #ef5350;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tap In Bingo | Melanated in Melbourne</title>
+<style>
+  :root {
+    --mim-purple: #4527a0;
+    --mim-dark: #1b0b30;
+    --mim-gold: #ffca28;
+    --mim-gold-soft: #ffd54f;
+    --text-light: #fdf7ff;
+    --text-muted: #cbb9e5;
+  }
 
-    * {
-      box-sizing: border-box;
-    }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(circle at top, var(--mim-purple), var(--mim-dark));
+    color: var(--text-light);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-      color: var(--text-main);
-      background: radial-gradient(circle at top, #4527a0, #120016);
-      transition: background 0.3s ease;
-    }
+  .brand {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--mim-gold);
+    margin-bottom: 6px;
+  }
 
-    body.bg-hunting {
-      background: radial-gradient(circle at top, #5e35b1, #1a0b2a);
-    }
+  h1 {
+    margin: 0 0 8px;
+  }
 
-    body.bg-complete {
-      background: radial-gradient(circle at top, #ffca28, #3e2723);
-    }
+  .subtitle {
+    margin-bottom: 16px;
+    color: var(--text-muted);
+    text-align: center;
+  }
 
-    .card {
-      width: 100%;
-      max-width: 460px;
-      background: var(--card-bg);
-      border-radius: 18px;
-      padding: 20px 18px 18px;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.55);
-      border: 1px solid var(--card-border);
-      backdrop-filter: blur(12px);
-    }
+  .banner {
+    background: rgba(34, 21, 54, 0.85);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+    margin-bottom: 14px;
+  }
 
-    h1 {
-      margin: 0 0 4px;
-      font-size: 1.35rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4em;
-    }
+  .bingo-board {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    width: 90vw;
+    max-width: 450px;
+    margin-bottom: 18px;
+  }
 
-    h1 span.emoji {
-      font-size: 1.6rem;
-    }
+  .square {
+    background: rgba(28, 20, 52, 0.85);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    font-size: 0.82rem;
+    transition: all 0.3s ease;
+  }
 
-    .brand {
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 4px;
-    }
+  .square.filled {
+    background: var(--mim-gold);
+    color: var(--mim-dark);
+    font-weight: 600;
+    box-shadow: 0 0 10px rgba(255, 213, 79, 0.5);
+  }
 
-    .subtitle {
-      margin: 0 0 12px;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
-    .banner {
-      padding: 10px 12px;
-      border-radius: 10px;
-      margin-bottom: 14px;
-      background: rgba(34, 21, 54, 0.95);
-      border: 1px solid rgba(255,255,255,0.09);
-      font-size: 0.95rem;
-    }
-
-    h2 {
-      margin: 10px 0 6px;
-      font-size: 1.05rem;
-    }
-
-    #progress {
-      margin: 0 0 8px;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 4px;
-    }
-
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-      font-size: 0.82rem;
-      background: rgba(28, 20, 52, 0.95);
-    }
-
-    .chip-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      margin-right: 6px;
-      border: 1px solid rgba(255,255,255,0.4);
-      background: #7e57c2;
-    }
-
-    .footer {
-      margin-top: 10px;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .footer strong {
-      color: var(--accent-strong);
-    }
-
-    .reward {
-      margin-top: 14px;
-      padding: 12px 12px 10px;
-      border-radius: 12px;
-      background: rgba(255, 214, 79, 0.12);
-      border: 1px solid rgba(255, 214, 79, 0.6);
-      font-size: 0.9rem;
-    }
-
-    .reward-title {
-      font-weight: 600;
-      margin-bottom: 4px;
-      color: var(--accent-strong);
-    }
-
-    .reward-btn {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: none;
-      background: var(--accent-strong);
-      color: #3e2723;
-      font-weight: 600;
-      font-size: 0.9rem;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .reward-btn:hover {
-      background: #ffe082;
-    }
-
-    .small {
-      font-size: 0.8rem;
-    }
-  </style>
+  .reward {
+    display: none;
+    border: 1px solid var(--mim-gold-soft);
+    border-radius: 12px;
+    background: rgba(255, 214, 79, 0.1);
+    color: var(--mim-gold);
+    padding: 14px;
+    text-align: center;
+  }
+</style>
 </head>
-<body class="bg-hunting">
-  <div class="card">
-    <div class="brand">Melanated in Melbourne</div>
-    <h1><span class="emoji">📡</span> Tap In</h1>
-    <p class="subtitle">Find all ten tags around the space to unlock a special reward.</p>
+<body>
+  <div class="brand">Melanated in Melbourne</div>
+  <h1>📡 Tap In Bingo</h1>
+  <p class="subtitle">Scan NFC tags around the space. Fill a row, column, or diagonal to win!</p>
 
-    <div id="message" class="banner">Loading…</div>
+  <div id="message" class="banner">Loading…</div>
 
-    <h2>Your found tags</h2>
-    <p id="progress"></p>
-    <div id="tag-list" class="chips"></div>
+  <div id="bingo-grid" class="bingo-board"></div>
 
-    <div id="reward-block" class="reward" style="display:none;">
-      <div class="reward-title">🎉 You’ve unlocked the Reward</div>
-      <p id="reward-text">
-        You’ve found all ten Tap In tags tonight. Show this screen to the team and tap the button below to go to our Patreon reward page for your 3-month subscription instructions.
-      </p>
-      <a id="reward-link" class="reward-btn" href="#" target="_blank" rel="noopener noreferrer">
-        Go to Patreon reward
-      </a>
-      <p class="small" style="margin-top:6px;">
-        Tip: take a screenshot in case reception drops while you claim it.
-      </p>
-    </div>
-
-    <div class="footer">
-      <span id="footer-note"></span>
-      <span class="small">Keep this tab open during the event.</span>
-    </div>
+  <div id="reward" class="reward">
+    🎉 Bingo! You’ve completed a Tap In line — show this to a host for your reward.
   </div>
 
-  <script>
-    (function() {
-      /****************************************************
-       * 1. CONFIG
-       ****************************************************/
+<script>
+(function(){
+  const TAGS = {
+    tag1: {label:'Song of the Week'},
+    tag2: {label:'Meet Someone New'},
+    tag3: {label:'MiM Episode Tag'},
+    tag4: {label:'Compliment Swap'},
+    tag5: {label:'Laugh Together'},
+    tag6: {label:'Share a Goal'},
+    tag7: {label:'Tap with Host'},
+    tag8: {label:'Solo Moment'},
+    tag9: {label:'Creative Spark'},
+    tag10:{label:'Stories We Need'},
+    tag11:{label:'Grounded Space'},
+    tag12:{label:'Gratitude Tap'},
+    tag13:{label:'Find Someone in Yellow'},
+    tag14:{label:'Your Soundtrack'},
+    tag15:{label:'Community Wish'},
+    tag16:{label:'Podcast Pitch'},
+    tag17:{label:'Ask “What Brings You Joy?”'},
+    tag18:{label:'Episode Tap'},
+    tag19:{label:'Deep Breath'},
+    tag20:{label:'Reflect & Share'},
+    tag21:{label:'Selfie Tag'},
+    tag22:{label:'Connection Tap'},
+    tag23:{label:'Free Space'},
+    tag24:{label:'Proud Moment'},
+    tag25:{label:'Hidden Gem'}
+  };
 
-      // 👉 EDIT THIS: put your actual Patreon reward URL here
-      const PATREON_URL = 'https://www.patreon.com/'; // replace with your specific reward / post / instructions
+  const STORAGE_KEY='mim_bingo_state';
+  const state=loadState();
+  const tagParam=new URLSearchParams(window.location.search).get('tag');
+  const messageEl=document.getElementById('message');
+  const grid=document.getElementById('bingo-grid');
+  const reward=document.getElementById('reward');
 
-      // 👉 EDIT THIS: define exactly 10 tags
-      // Each key must match the ?tag= value you put on the NFC tag URL.
-      const TAGS = {
-        tag1: {
-          label: 'Signal 1',
-          prompt: 'Ask someone nearby: “What brought you to Melanated in Melbourne tonight?”'
-        },
-        tag2: {
-          label: 'Signal 2',
-          prompt: 'Find someone with a similar style and compliment one thing they’re wearing.'
-        },
-        tag3: {
-          label: 'Signal 3',
-          prompt: 'Ask a stranger: “What would the title of your life podcast be?”'
-        },
-        tag4: {
-          label: 'Signal 4',
-          prompt: 'Share with someone: a song that feels like home — and ask them for theirs.'
-        },
-        tag5: {
-          label: 'Signal 5',
-          prompt: 'Find someone laughing and ask what made them laugh tonight.'
-        },
-        tag6: {
-          label: 'Signal 6',
-          prompt: 'Tell someone one thing you’re proud of yourself for this year.'
-        },
-        tag7: {
-          label: 'Signal 7',
-          prompt: 'Ask someone: “What kind of story do you want to hear more of in our communities?”'
-        },
-        tag8: {
-          label: 'Signal 8',
-          prompt: 'With someone you’ve just met, take a selfie and call it your “Episode 1 cover art”.'
-        },
-        tag9: {
-          label: 'Signal 9',
-          prompt: 'Ask someone what their comfort show, podcast, or YouTube rabbit hole is.'
-        },
-        tag10: {
-          label: 'Signal 10',
-          prompt: 'Find someone standing alone and invite them into your conversation or group.'
-        }
-      };
+  if(tagParam && TAGS[tagParam]){
+    if(!state.collected.includes(tagParam)){
+      state.collected.push(tagParam);
+      saveState();
+      messageEl.textContent=`✅ You unlocked: ${TAGS[tagParam].label}`;
+    }
+  }else if(!tagParam){
+    messageEl.textContent='Tap a tag to fill your Bingo board!';
+  }
 
-      const TOTAL_TAGS = Object.keys(TAGS).length; // should be 10
-      const STORAGE_KEY = 'mim_signal_hunt_10tags';
+  renderBoard();
+  checkForBingo();
 
-      /****************************************************
-       * 2. UTILITIES
-       ****************************************************/
-      function getQueryParam(name) {
-        const params = new URLSearchParams(window.location.search);
-        return params.get(name);
-      }
+  function loadState(){
+    try{
+      const raw=localStorage.getItem(STORAGE_KEY);
+      return raw?JSON.parse(raw):{collected:[]};
+    }catch{return{collected:[]}}
+  }
+  function saveState(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}
 
-      function loadState() {
-        try {
-          const raw = localStorage.getItem(STORAGE_KEY);
-          if (!raw) return { collected: [] };
-          const parsed = JSON.parse(raw);
-          if (!parsed || !Array.isArray(parsed.collected)) return { collected: [] };
-          return parsed;
-        } catch (e) {
-          return { collected: [] };
-        }
-      }
+  function renderBoard(){
+    grid.innerHTML='';
+    Object.entries(TAGS).forEach(([id,cfg])=>{
+      const sq=document.createElement('div');
+      sq.className='square'+(state.collected.includes(id)?' filled':'');
+      sq.textContent=cfg.label;
+      grid.appendChild(sq);
+    });
+  }
 
-      function saveState(state) {
-        try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-        } catch (e) {
-          // ignore
-        }
-      }
-
-      function unique(list) {
-        const s = new Set();
-        list.forEach(x => s.add(x));
-        return Array.from(s);
-      }
-
-      /****************************************************
-       * 3. MAIN LOGIC
-       ****************************************************/
-      const tagId = (getQueryParam('tag') || '').trim();
-      const state = loadState();
-
-      const messageEl   = document.getElementById('message');
-      const progressEl  = document.getElementById('progress');
-      const tagListEl   = document.getElementById('tag-list');
-      const footerNote  = document.getElementById('footer-note');
-      const rewardBlock = document.getElementById('reward-block');
-      const rewardLink  = document.getElementById('reward-link');
-
-      rewardLink.href = PATREON_URL;
-
-      const knownTag = tagId && TAGS[tagId];
-
-      if (!tagId) {
-        messageEl.textContent = 'Tap any tag around the space to get started.';
-      } else if (!knownTag) {
-        messageEl.textContent = 'This tag isn’t one of tonight’s ten, but you clearly like exploring — respect.';
-      } else {
-        // add to state
-        state.collected.push(tagId);
-        state.collected = unique(state.collected);
-        saveState(state);
-
-        const cfg = TAGS[tagId];
-        messageEl.innerHTML = '<strong>' + cfg.label + '</strong><br>' + (cfg.prompt || '');
-      }
-
-      const collectedValid = state.collected.filter(id => TAGS[id]);
-      const collectedCount = collectedValid.length;
-
-      // build chip list
-      tagListEl.innerHTML = '';
-      if (collectedCount === 0) {
-        tagListEl.innerHTML = '<span class="small">No tags yet – go find one glowing in the wild.</span>';
-      } else {
-        collectedValid
-          .map(id => TAGS[id].label)
-          .sort((a, b) => a.localeCompare(b))
-          .forEach(label => {
-            const chip = document.createElement('div');
-            chip.className = 'chip';
-
-            const dot = document.createElement('span');
-            dot.className = 'chip-dot';
-            chip.appendChild(dot);
-
-            chip.appendChild(document.createTextNode(label));
-            tagListEl.appendChild(chip);
-          });
-      }
-
-      // progress text
-      progressEl.textContent =
-        'You\'ve found ' + collectedCount + ' of ' + TOTAL_TAGS + ' tags.';
-
-      // completion logic
-      if (collectedCount >= TOTAL_TAGS) {
-        document.body.classList.remove('bg-hunting');
-        document.body.classList.add('bg-complete');
-
-        rewardBlock.style.display = 'block';
-        footerNote.innerHTML = '<strong>Complete!</strong> You’ve found them all.';
-      } else if (collectedCount > 0) {
-        footerNote.textContent = 'Keep roaming – more tags are hidden around the space.';
-      } else {
-        footerNote.textContent = '';
-      }
-    })();
-  </script>
+  function checkForBingo(){
+    const filled=state.collected;
+    const ids=Object.keys(TAGS);
+    const board=Array.from({length:5},(_,r)=>ids.slice(r*5,(r+1)*5));
+    const win=board.some(row=>row.every(id=>filled.includes(id)))||
+              [...Array(5).keys()].some(c=>board.every(r=>filled.includes(r[c])))||
+              board.every((r,i)=>filled.includes(r[i]))||
+              board.every((r,i)=>filled.includes(r[4-i]));
+    if(win) reward.style.display='block';
+  }
+})();
+</script>
 </body>
 </html>
