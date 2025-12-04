@@ -2,14 +2,17 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>NFC Colour Hunt</title>
+  <title>Tap In | Melanated in Melbourne</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
     :root {
-      --card-bg: rgba(255, 255, 255, 0.92);
-      --card-border: rgba(255, 255, 255, 0.3);
-      --text-main: #212121;
-      --text-muted: #555;
+      --card-bg: rgba(12, 7, 18, 0.92);
+      --card-border: rgba(255, 255, 255, 0.2);
+      --text-main: #fdf7ff;
+      --text-muted: #cbb9e5;
+      --accent: #ffd54f;
+      --accent-strong: #ffca28;
+      --danger: #ef5350;
     }
 
     * {
@@ -25,38 +28,32 @@
       justify-content: center;
       padding: 16px;
       color: var(--text-main);
-      background: radial-gradient(circle at top, #e0e0e0, #9e9e9e);
+      background: radial-gradient(circle at top, #4527a0, #120016);
       transition: background 0.3s ease;
     }
 
-    /* Backgrounds per colour */
-    body.bg-red {
-      background: radial-gradient(circle at top, #ff8a80, #c62828);
+    body.bg-hunting {
+      background: radial-gradient(circle at top, #5e35b1, #1a0b2a);
     }
-    body.bg-blue {
-      background: radial-gradient(circle at top, #82b1ff, #1565c0);
-    }
-    body.bg-green {
-      background: radial-gradient(circle at top, #a5d6a7, #2e7d32);
-    }
-    body.bg-yellow {
-      background: radial-gradient(circle at top, #ffe082, #f9a825);
+
+    body.bg-complete {
+      background: radial-gradient(circle at top, #ffca28, #3e2723);
     }
 
     .card {
       width: 100%;
-      max-width: 420px;
+      max-width: 460px;
       background: var(--card-bg);
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 20px 18px 18px;
-      box-shadow: 0 14px 30px rgba(0,0,0,0.22);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.55);
       border: 1px solid var(--card-border);
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(12px);
     }
 
     h1 {
       margin: 0 0 4px;
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       display: flex;
       align-items: center;
       gap: 0.4em;
@@ -64,6 +61,15 @@
 
     h1 span.emoji {
       font-size: 1.6rem;
+    }
+
+    .brand {
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
     }
 
     .subtitle {
@@ -76,8 +82,8 @@
       padding: 10px 12px;
       border-radius: 10px;
       margin-bottom: 14px;
-      background: rgba(255,255,255,0.8);
-      border: 1px solid rgba(0,0,0,0.04);
+      background: rgba(34, 21, 54, 0.95);
+      border: 1px solid rgba(255,255,255,0.09);
       font-size: 0.95rem;
     }
 
@@ -96,7 +102,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
 
     .chip {
@@ -104,157 +110,240 @@
       align-items: center;
       padding: 4px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.08);
-      font-size: 0.85rem;
-      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 0.82rem;
+      background: rgba(28, 20, 52, 0.95);
     }
 
-    .colour-swatch {
-      width: 12px;
-      height: 12px;
+    .chip-dot {
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       margin-right: 6px;
-      border: 1px solid rgba(0,0,0,0.15);
+      border: 1px solid rgba(255,255,255,0.4);
+      background: #7e57c2;
     }
 
-    .swatch-red    { background: #e53935; }
-    .swatch-blue   { background: #1e88e5; }
-    .swatch-green  { background: #43a047; }
-    .swatch-yellow { background: #fdd835; }
-
     .footer {
-      margin-top: 8px;
-      font-size: 0.8rem;
+      margin-top: 10px;
+      font-size: 0.78rem;
       color: var(--text-muted);
-      text-align: right;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .footer strong {
+      color: var(--accent-strong);
+    }
+
+    .reward {
+      margin-top: 14px;
+      padding: 12px 12px 10px;
+      border-radius: 12px;
+      background: rgba(255, 214, 79, 0.12);
+      border: 1px solid rgba(255, 214, 79, 0.6);
+      font-size: 0.9rem;
+    }
+
+    .reward-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--accent-strong);
+    }
+
+    .reward-btn {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent-strong);
+      color: #3e2723;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .reward-btn:hover {
+      background: #ffe082;
+    }
+
+    .small {
+      font-size: 0.8rem;
     }
   </style>
 </head>
-<body>
+<body class="bg-hunting">
   <div class="card">
-    <h1><span class="emoji">🎨</span> NFC Colour Hunt</h1>
-    <p class="subtitle">Tap tags, collect colours, finish the set.</p>
+    <div class="brand">Melanated in Melbourne</div>
+    <h1><span class="emoji">📡</span> Tap In</h1>
+    <p class="subtitle">Find all ten tags around the space to unlock a special reward.</p>
 
     <div id="message" class="banner">Loading…</div>
 
-    <h2>Your colours</h2>
+    <h2>Your found tags</h2>
     <p id="progress"></p>
-    <div id="colour-list" class="chips"></div>
+    <div id="tag-list" class="chips"></div>
 
-    <div class="footer" id="footer-note"></div>
+    <div id="reward-block" class="reward" style="display:none;">
+      <div class="reward-title">🎉 You’ve unlocked the Reward</div>
+      <p id="reward-text">
+        You’ve found all ten Signal Hunt tags tonight. Show this screen to the team and tap the button below to go to our Patreon reward page for your 3-month subscription instructions.
+      </p>
+      <a id="reward-link" class="reward-btn" href="#" target="_blank" rel="noopener noreferrer">
+        Go to Patreon reward
+      </a>
+      <p class="small" style="margin-top:6px;">
+        Tip: take a screenshot in case reception drops while you claim it.
+      </p>
+    </div>
+
+    <div class="footer">
+      <span id="footer-note"></span>
+      <span class="small">Keep this tab open during the event.</span>
+    </div>
   </div>
 
   <script>
     (function() {
-      // Colours in the game
-      var ALL_COLOURS = ['red', 'blue', 'green', 'yellow'];
-      var LABELS = {
-        red: 'Red',
-        blue: 'Blue',
-        green: 'Green',
-        yellow: 'Yellow'
+      /****************************************************
+       * 1. CONFIG
+       ****************************************************/
+
+      // 👉 EDIT THIS: put your actual Patreon reward URL here
+      const PATREON_URL = 'https://www.patreon.com/'; // replace with your specific reward / post / instructions
+
+      // 👉 EDIT THIS: define exactly 10 tags
+      // Each key must match the ?tag= value you put on the NFC tag URL.
+      const TAGS = {
+        tag1: {
+          label: 'Signal 1',
+          prompt: 'Ask someone nearby: “What brought you to Melanated in Melbourne tonight?”'
+        },
+        tag2: {
+          label: 'Signal 2',
+          prompt: 'Find someone with a similar style and compliment one thing they’re wearing.'
+        },
+        tag3: {
+          label: 'Signal 3',
+          prompt: 'Ask a stranger: “What would the title of your life podcast be?”'
+        },
+        tag4: {
+          label: 'Signal 4',
+          prompt: 'Share with someone: a song that feels like home — and ask them for theirs.'
+        },
+        tag5: {
+          label: 'Signal 5',
+          prompt: 'Find someone laughing and ask what made them laugh tonight.'
+        },
+        tag6: {
+          label: 'Signal 6',
+          prompt: 'Tell someone one thing you’re proud of yourself for this year.'
+        },
+        tag7: {
+          label: 'Signal 7',
+          prompt: 'Ask someone: “What kind of story do you want to hear more of in our communities?”'
+        },
+        tag8: {
+          label: 'Signal 8',
+          prompt: 'With someone you’ve just met, take a selfie and call it your “Episode 1 cover art”.'
+        },
+        tag9: {
+          label: 'Signal 9',
+          prompt: 'Ask someone what their comfort show, podcast, or YouTube rabbit hole is.'
+        },
+        tag10: {
+          label: 'Signal 10',
+          prompt: 'Find someone standing alone and invite them into your conversation or group.'
+        }
       };
 
+      const TOTAL_TAGS = Object.keys(TAGS).length; // should be 10
+      const STORAGE_KEY = 'mim_signal_hunt_10tags';
+
+      /****************************************************
+       * 2. UTILITIES
+       ****************************************************/
       function getQueryParam(name) {
-        var params = new URLSearchParams(window.location.search);
+        const params = new URLSearchParams(window.location.search);
         return params.get(name);
       }
 
       function loadState() {
         try {
-          var raw = localStorage.getItem('nfc_colour_hunt_state');
-          if (!raw) return { colours: [] };
-          var parsed = JSON.parse(raw);
-          if (!parsed || !Array.isArray(parsed.colours)) return { colours: [] };
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return { collected: [] };
+          const parsed = JSON.parse(raw);
+          if (!parsed || !Array.isArray(parsed.collected)) return { collected: [] };
           return parsed;
         } catch (e) {
-          return { colours: [] };
+          return { collected: [] };
         }
       }
 
       function saveState(state) {
         try {
-          localStorage.setItem('nfc_colour_hunt_state', JSON.stringify(state));
-        } catch (e) { /* ignore */ }
-      }
-
-      function unique(list) {
-        var s = new Set();
-        list.forEach(function(x) { s.add(x); });
-        return Array.from(s);
-      }
-
-      function setBodyBackgroundForColour(colour) {
-        document.body.classList.remove('bg-red', 'bg-blue', 'bg-green', 'bg-yellow');
-        if (colour && ALL_COLOURS.indexOf(colour) !== -1) {
-          document.body.classList.add('bg-' + colour);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (e) {
+          // ignore
         }
       }
 
-      var tag = (getQueryParam('tag') || '').toLowerCase();
-      var state = loadState();
+      function unique(list) {
+        const s = new Set();
+        list.forEach(x => s.add(x));
+        return Array.from(s);
+      }
 
-      var messageEl = document.getElementById('message');
-      var progressEl = document.getElementById('progress');
-      var listEl = document.getElementById('colour-list');
-      var footerEl = document.getElementById('footer-note');
+      /****************************************************
+       * 3. MAIN LOGIC
+       ****************************************************/
+      const tagId = (getQueryParam('tag') || '').trim();
+      const state = loadState();
 
-      if (!tag) {
-        messageEl.textContent = 'Tap a colour tag to start collecting.';
-      } else if (ALL_COLOURS.indexOf(tag) === -1) {
-        messageEl.textContent = 'Unknown colour tag: ' + tag;
+      const messageEl   = document.getElementById('message');
+      const progressEl  = document.getElementById('progress');
+      const tagListEl   = document.getElementById('tag-list');
+      const footerNote  = document.getElementById('footer-note');
+      const rewardBlock = document.getElementById('reward-block');
+      const rewardLink  = document.getElementById('reward-link');
+
+      rewardLink.href = PATREON_URL;
+
+      const knownTag = tagId && TAGS[tagId];
+
+      if (!tagId) {
+        messageEl.textContent = 'Tap any tag around the space to get started.';
+      } else if (!knownTag) {
+        messageEl.textContent = 'This tag isn’t one of tonight’s ten, but you clearly like exploring — respect.';
       } else {
-        // change background to match colour
-        setBodyBackgroundForColour(tag);
-
-        // Add this colour to state
-        state.colours.push(tag);
-        state.colours = unique(state.colours);
+        // add to state
+        state.collected.push(tagId);
+        state.collected = unique(state.collected);
         saveState(state);
 
-        var label = LABELS[tag] || tag;
-        messageEl.innerHTML = 'You just collected: <strong>' + label + '</strong> 🎉';
+        const cfg = TAGS[tagId];
+        messageEl.innerHTML = '<strong>' + cfg.label + '</strong><br>' + (cfg.prompt || '');
       }
 
-      // Build list & progress
-      var collected = state.colours;
-      var total = ALL_COLOURS.length;
-      var count = collected.length;
+      const collectedValid = state.collected.filter(id => TAGS[id]);
+      const collectedCount = collectedValid.length;
 
-      progressEl.textContent = 'You have collected ' + count + ' of ' + total + ' colours.';
-
-      listEl.innerHTML = '';
-
-      if (count === 0) {
-        listEl.textContent = 'No colours yet – go find a tag!';
+      // build chip list
+      tagListEl.innerHTML = '';
+      if (collectedCount === 0) {
+        tagListEl.innerHTML = '<span class="small">No tags yet – go find one glowing in the wild.</span>';
       } else {
-        collected.sort().forEach(function(c) {
-          var chip = document.createElement('div');
-          chip.className = 'chip';
+        collectedValid
+          .map(id => TAGS[id].label)
+          .sort((a, b) => a.localeCompare(b))
+          .forEach(label => {
+            const chip = document.createElement('div');
+            chip.className = 'chip';
 
-          var swatch = document.createElement('span');
-          swatch.className = 'colour-swatch swatch-' + c;
-          chip.appendChild(swatch);
-
-          var text = document.createTextNode(LABELS[c] || c);
-          chip.appendChild(text);
-
-          listEl.appendChild(chip);
-        });
-      }
-
-      if (count === total && total > 0) {
-        footerEl.textContent = '🎉 You collected them all!';
-      } else {
-        footerEl.textContent = '';
-      }
-
-      // If there was a previous collection but no tag in URL,
-      // set background to the first collected colour as a vibe
-      if (!tag && collected.length > 0) {
-        setBodyBackgroundForColour(collected[0]);
-      }
-    })();
-  </script>
-</body>
-</html>
+            const dot = document.createElement('span');
+      
+::contentReference[oaicite:0]{index=0}
