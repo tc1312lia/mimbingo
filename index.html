@@ -221,6 +221,12 @@ if(tagParam && TAGS[tagParam]){
     html+=`<br><a href="${link}" target="_blank" class="mim-button">Open</a>`;
   }
   messageEl.innerHTML=html;
+} else {
+    messageEl.innerHTML =
+      `<strong>Not on your board — that’s okay!</strong><br>` +
+      `Say hello to someone nearby and keep exploring.`;
+    sendLog({event:'tag_not_on_board',tagId:tagParam});
+}
 }else{
   messageEl.textContent='Tap a tag to fill your 3×3 Bingo board!';
 }
