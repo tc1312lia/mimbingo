@@ -202,13 +202,6 @@ const TAGS={};
 state.layout.forEach(k=>TAGS[k]=ALL_TAGS[k]);
 
 /* scan handling */
-const params=new URLSearchParams(window.location.search);
-const tagParam=(params.get('tag')||'').trim();
-const messageEl=document.getElementById('message');
-const grid=document.getElementById('bingo-grid');
-const reward=document.getElementById('reward');
-
-/* scan handling */
 const params = new URLSearchParams(window.location.search);
 const tagParam = (params.get('tag') || '').trim();
 const messageEl = document.getElementById('message');
