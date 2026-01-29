@@ -118,7 +118,7 @@
 
 <body>
 <p class="subtitle">
-  Tap or scan the QR codes around the space. Fill a row, column, or diagonal on your 3×3 board to win!
+  Tap or scan the QR codes around the space. Fill a row, column, or diagonal on your 3×3 board!
 </p>
 
 <div id="message" class="banner">Loading…</div>
@@ -134,7 +134,7 @@
 
 <script>
 (function(){
-const TRACKING_URL = 'https://script.google.com/macros/s/AKfycbw_sb0oc3qbJag8lU4g7tHWsWjdWZ9iUaoCtyyjZNn0H0Muurt92DOmT_RdjPVArW6nbw/exec';
+const TRACKING_URL = 'https://script.google.com/macros/s/AKfycbwOedP-fzWRWexSYXvF6QdA4vVi28-aR1eMfhpKkUAsjjfSZ5PCQvNYnmWAFLCYZlp8Qw/exec';
 
 /* stable player identity */
 function getPlayerName(){
@@ -174,20 +174,20 @@ function sendLog(p){
 
 /* tags */
 const ALL_TAGS={
-tag1:{label:'Volunteer',prompt:'Congrats! You found a volunteer tag.'},
-tag2:{label:'Meet Someone New',prompt:'Congrats! You found a newbie tag.'},
-tag3:{label:'Gqom Girl',prompt:'50th episode!',episodeUrl:'https://open.spotify.com/episode/7bkqqPhmVyCqX4uOSMGuIT?si=ec4c509b098c49fc'},
+tag1:{label:'Volunteer',prompt:'Congrats! You found a volunteer.'},
+tag2:{label:'Meet Someone New',prompt:'Congrats! You found a newbie.'},
+tag3:{label:'Gqom Girl',prompt:'50th episode! Nicole and Ri/chard dressed like senior citizens to chat with Chrissy aka Mothafunk.',episodeUrl:'https://open.spotify.com/episode/7bkqqPhmVyCqX4uOSMGuIT?si=ec4c509b098c49fc'},
 tag4:{label:'Share a Goal',prompt:'Tell someone about a goal you’re working toward.'},
-tag5:{label:'Make a New Friend',prompt:'Congrats! You found a new friend tag.'},
-tag6:{label:'Stories We Need',prompt:'What stories do you want more of?',formUrl:'https://forms.gle/w73o1BtQ3H3ZBz3L6'},
+tag5:{label:'Make a New Friend',prompt:'Congrats! You found a new friend.'},
+tag6:{label:'Stories We Need',prompt:'What kind of stories do you wish you heard more often - in media or real life?',formUrl:'https://forms.gle/w73o1BtQ3H3ZBz3L6'},
 tag7:{label:'Grounded Space',prompt:'Pause and take a breath.'},
-tag8:{label:'Follow Us!',prompt:'Not following yet? 👉 Tap here to follow us on Instagram.',formUrl:'https://www.instagram.com/melanatedinmelbourne/'},
-tag9:{label:'Community Events',prompt:'What do you want more of?',formUrl:'https://forms.gle/Bw4Gwf3yB6bQ95WP8'},
-tag10:{label:'To Be Loved',prompt:'What/s been your dating experience in Melbourne?',episodeUrl:'https://open.spotify.com/episode/4OGs7XIUsJrMwwEQydhZiT?si=e6b34fb781a74052'},
-tag11:{label:'No Nutbush November',prompt:'An honest conversation unpacking HIV and AIDS myths, stigma, and progress.',episodeUrl:'https://open.spotify.com/episode/4yt7R2y10fgPwVP7BfjzWx?si=606c627299b1485d'},
+tag8:{label:'Follow Us!',prompt:'Not following yet? Tap below to follow us on Instagram.',formUrl:'https://www.instagram.com/melanatedinmelbourne/'},
+tag9:{label:'Community Events',prompt:'What type of events do you want more of?',formUrl:'https://forms.gle/Bw4Gwf3yB6bQ95WP8'},
+tag10:{label:'To Be Loved',prompt:'Ri/chard and Adam welcome Alison to the booth and they dive into the complexities of dating in Australia, especially from the perspective of Black and Brown expats.',episodeUrl:'https://open.spotify.com/episode/4OGs7XIUsJrMwwEQydhZiT?si=e6b34fb781a74052'},
+tag11:{label:'No Nutbush November',prompt:'Ri/chard and Nicole discuss the myths, stigmas, and advancements related to HIV and AIDS with their special guest, Dr. Hans.',episodeUrl:'https://open.spotify.com/episode/4yt7R2y10fgPwVP7BfjzWx?si=606c627299b1485d'},
 tag12:{label:'Expand the circle',prompt:'Invite someone standing alone to join your conversation.'},
 tag13:{label:'Make a connection',prompt:'Introduce two people who haven’t met yet.'},
-tag14:{label:'Capture a moment 📸',prompt:'Take a photo with someone'},
+tag14:{label:'Capture a moment',prompt:'Take a photo - a selfie, with a new friend or anything you like!'},
 tag15:{label:'Ask someone',prompt:'Which performer are you most excited to see tonight?.'}
 };
 
@@ -226,15 +226,19 @@ if (tagParam) {
     const cfg = TAGS[tagParam];
     let html = `<strong>✅ You unlocked: ${cfg.label}</strong><br>${cfg.prompt}`;
 
-    if (cfg.episodeUrl || cfg.formUrl) {
-      const link = cfg.episodeUrl || cfg.formUrl;
-      html += `<br><a href="${link}" target="_blank" class="mim-button">Open</a>`;
-    }
+if (cfg.episodeUrl || cfg.formUrl) {
+  const link = cfg.episodeUrl || cfg.formUrl;
+  const label = cfg.episodeUrl
+    ? "Listen on Spotify"
+    : "Let us know here";
+
+  html += `<br><a href="${link}" target="_blank" class="mim-button">${label}</a>`;
+}
 
     messageEl.innerHTML = html;
   } else {
     messageEl.innerHTML =
-      `<strong>Not on your board — that’s okay!</strong><br>` +
+      `<strong>Not on your board, that’s okay!</strong><br>` +
       `Say hello to someone nearby and keep exploring.`;
     sendLog({ event: 'tag_not_on_board', tagId: tagParam });
   }
