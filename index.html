@@ -118,7 +118,7 @@
 
 <body>
 <p class="subtitle">
-  Scan NFC tags around the space. Fill a row, column, or diagonal on your 3×3 board to win!
+  Tap or scan the QR codes around the space. Fill a row, column, or diagonal on your 3×3 board to win!
 </p>
 
 <div id="message" class="banner">Loading…</div>
@@ -129,7 +129,7 @@
 </a>
 
 <div id="reward" class="reward">
-🎉 Bingo! You’ve completed a Tap In line — show this to a host for your reward.
+🎉 Bingo! You’ve completed a line!
 </div>
 
 <script>
@@ -239,7 +239,7 @@ if (tagParam) {
     sendLog({ event: 'tag_not_on_board', tagId: tagParam });
   }
 } else {
-  messageEl.textContent = 'Tap a tag to fill your 3×3 Bingo board!';
+  messageEl.textContent = 'Tap or scan to fill your 3×3 Bingo board!';
 }
 
 
