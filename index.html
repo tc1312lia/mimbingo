@@ -181,7 +181,7 @@ tag4:{label:'Share a Goal',prompt:'Tell someone about a goal you’re working to
 tag5:{label:'Make a New Friend',prompt:'Congrats! You found a new friend.'},
 tag6:{label:'Stories We Need',prompt:'What kind of stories do you wish you heard more often - in media or real life?',formUrl:'https://forms.gle/w73o1BtQ3H3ZBz3L6'},
 tag7:{label:'Grounded Space',prompt:'Pause and take a breath.'},
-tag8:{label:'Follow Us!',prompt:'Not following yet? Tap below to follow us on Instagram.',formUrl:'https://www.instagram.com/melanatedinmelbourne/'},
+tag8:{label:'Follow Us!',prompt:'Stay connected with us on Instagram!',instaUrl:'https://www.instagram.com/melanatedinmelbourne/'},
 tag9:{label:'Community Events',prompt:'What type of events do you want more of?',formUrl:'https://forms.gle/Bw4Gwf3yB6bQ95WP8'},
 tag10:{label:'To Be Loved',prompt:'Ri\'chard and Adam welcome Alison to the booth and they dive into the complexities of dating in Australia, especially from the perspective of Black and Brown expats.',episodeUrl:'https://open.spotify.com/episode/4OGs7XIUsJrMwwEQydhZiT?si=e6b34fb781a74052'},
 tag11:{label:'No Nutbush November',prompt:'Ri\'chard and Nicole discuss the myths, stigmas, and advancements related to HIV and AIDS with their special guest, Dr. Hans.',episodeUrl:'https://open.spotify.com/episode/4yt7R2y10fgPwVP7BfjzWx?si=606c627299b1485d'},
@@ -226,11 +226,17 @@ if (tagParam) {
     const cfg = TAGS[tagParam];
     let html = `<strong>✅ You unlocked: ${cfg.label}</strong><br>${cfg.prompt}`;
 
-if (cfg.episodeUrl || cfg.formUrl) {
-  const link = cfg.episodeUrl || cfg.formUrl;
+if (cfg.episodeUrl || cfg.formUrl || cfg.instaUrl) {
+  const link =
+    cfg.episodeUrl ||
+    cfg.formUrl ||
+    cfg.instaUrl;
+
   const label = cfg.episodeUrl
     ? "Listen on Spotify"
-    : "Let us know here";
+    : cfg.formUrl
+    ? "Let us know here"
+    : "MiM Instagram";
 
   html += `<br><a href="${link}" target="_blank" class="mim-button">${label}</a>`;
 }
