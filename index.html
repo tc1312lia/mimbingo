@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title> MIM BINGO </title>
+<title>MIM BINGO</title>
+
 <style>
   :root {
     --mim-purple: #4527a0;
@@ -14,32 +15,24 @@
     --text-muted: #cbb9e5;
   }
 
- body {
-  margin: 0;
-  min-height: 100vh;
+  body {
+    margin: 0;
+    min-height: 100vh;
 
-  background:
-    linear-gradient(rgba(27, 11, 48, 0.4), rgba(27, 11, 48, 0.4)),
-    url("assets/bingo bakgrounf.png");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+    background:
+      linear-gradient(rgba(27, 11, 48, 0.4), rgba(27, 11, 48, 0.4)),
+      url("assets/bingo bakgrounf.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 
-  color: var(--text-light);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 20px;
-  }
-
-  .brand {
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--mim-gold);
-    margin-bottom: 60px;
+    color: var(--text-light);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
   }
 
   h1 { margin: 0 0 8px; }
@@ -58,50 +51,18 @@
     padding: 12px;
     text-align: center;
     margin-bottom: 14px;
+    max-width: 520px;
   }
 
-  .mim-button {
-    margin-top: 16px;
-    display: inline-block;
-    padding: 10px 18px;
-    border-radius: 999px;
-    background: var(--mim-gold);
-    color: var(--mim-dark);
-    font-weight: 600;
-    text-decoration: none;
-    font-size: 0.9rem;
-  }
-</style>
-</head>
-
-<body>
-<p class="subtitle">
-  Thank you for playing! Follow us on instagram or join our mailing list to be the first to hear about our next events!
-</p>
-
-<div id="message" class="banner">Melanated in Melbourne</div>
-<div id="bingo-grid" class="bingo-board"></div>
-
-<a href="https://forms.gle/xxpoqm2U7CXWmqWK7" class="mim-button">
-  Join the mailing list!
-</a>
-
-
-<script>
-
-@@ -60,54 +60,6 @@
+  /* 3x3 grid */
+  .bingo-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    width: min(90vw, 360px);
     margin-bottom: 14px;
   }
 
-/* 3x3 grid */
-.bingo-board {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  width: min(90vw, 360px);
-  margin-bottom: 14px;
-}
- 
   .square {
     background: rgba(28, 20, 52, 0.85);
     border: 1px solid rgba(255,255,255,0.18);
@@ -125,212 +86,209 @@
     box-shadow: 0 0 10px rgba(255, 213, 79, 0.5);
   }
 
-.reward {
-  display: none;
+  .reward {
+    display: none;
 
-  /* pin near top */
-  position: sticky;
-  top: 10px;
-  z-index: 10;
-  border: 1px solid var(--mim-gold-soft);
-  border-radius: 12px;
-  background: rgba(255, 214, 79, 0.1);
-  color: var(--mim-gold);
-  padding: 14px;
-  text-align: center;
-  margin: 10px auto;
-}
+    /* pin near top */
+    position: sticky;
+    top: 10px;
+    z-index: 10;
+    border: 1px solid var(--mim-gold-soft);
+    border-radius: 12px;
+    background: rgba(255, 214, 79, 0.1);
+    color: var(--mim-gold);
+    padding: 14px;
+    text-align: center;
+    margin: 10px auto;
+    width: min(90vw, 520px);
+  }
 
   .mim-button {
     margin-top: 16px;
     display: inline-block;
-@@ -124,7 +76,7 @@
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: var(--mim-gold);
+    color: var(--mim-dark);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+</style>
+</head>
 
 <body>
-<p class="subtitle">
-  Tap or scan the QR codes around the space. Fill a row, column, or diagonal on your 3×3 board!
-</p>
+  <p class="subtitle">
+    Tap or scan the QR codes around the space. Fill a row, column, or diagonal on your 3×3 board!
+  </p>
 
-<div id="message" class="banner">Loading…</div>
-@@ -134,82 +86,27 @@
-  Join the mailing list!
-</a>
+  <div id="message" class="banner">Loading…</div>
+  <div id="bingo-grid" class="bingo-board"></div>
 
-<div id="reward" class="reward">
-🎉 Bingo! You’ve completed a line! See someone at the merch table to enter the draw to win a MiM merch pack!
-</div>
+  <a href="https://forms.gle/xxpoqm2U7CXWmqWK7" class="mim-button">
+    Join the mailing list!
+  </a>
+
+  <div id="reward" class="reward">
+    🎉 Bingo! You’ve completed a line! See someone at the merch table to enter the draw to win a MiM merch pack!
+  </div>
 
 <script>
 (function(){
-const TRACKING_URL = 'https://script.google.com/macros/s/AKfycbwOedP-fzWRWexSYXvF6QdA4vVi28-aR1eMfhpKkUAsjjfSZ5PCQvNYnmWAFLCYZlp8Qw/exec';
+  const TRACKING_URL = 'https://script.google.com/macros/s/AKfycbwOedP-fzWRWexSYXvF6QdA4vVi28-aR1eMfhpKkUAsjjfSZ5PCQvNYnmWAFLCYZlp8Qw/exec';
 
-/* stable player identity */
-function getPlayerName(){
-  let n = localStorage.getItem('mim_player_name');
-  if(!n){
-    n = prompt("Enter your name (first name or nickname):") || "Guest";
-    localStorage.setItem('mim_player_name', n);
-  }
-  return n;
-}
-function getOrCreateNameSuffix(){
-  let s = localStorage.getItem('mim_name_suffix');
-  if(!s){
-    s = String(Math.floor(Math.random()*1000));
-    localStorage.setItem('mim_name_suffix', s);
-  }
-  return s;
-}
-function makeStablePlayerId(name){
-  const base = String(name).toLowerCase().replace(/[^a-z0-9]/g,'') || 'guest';
-  return `player-${base}-${getOrCreateNameSuffix()}`;
-}
-
-const playerName = getPlayerName();
-const playerId   = makeStablePlayerId(playerName);
-
-function sendLog(p){
-  try{
-    fetch(TRACKING_URL,{
-      method:'POST',
-      mode:'no-cors',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({...p, playerName, playerId})
-    });
-  }catch(e){}
-}
-
-/* tags */
-const ALL_TAGS={
-tag1:{label:'Volunteer',prompt:'Congrats! You found a volunteer.'},
-tag2:{label:'Meet Someone New',prompt:'Congrats! You found a newbie.'},
-tag3:{label:'Gqom Girl',prompt:'50th episode! Nicole and Ri\'chard dressed like senior citizens to chat with Chrissy aka Mothafunk.',episodeUrl:'https://open.spotify.com/episode/7bkqqPhmVyCqX4uOSMGuIT?si=ec4c509b098c49fc'},
-tag4:{label:'Share a Goal',prompt:'Tell someone about a goal you’re working toward.'},
-tag5:{label:'Make a New Friend',prompt:'Congrats! You found a new friend.'},
-tag6:{label:'Stories We Need',prompt:'What kind of stories do you wish you heard more often - in media or real life?',formUrl:'https://forms.gle/w73o1BtQ3H3ZBz3L6'},
-tag7:{label:'Grounded Space',prompt:'Pause and take a breath.'},
-tag8:{label:'Follow Us!',prompt:'Stay connected with us on Instagram!',instaUrl:'https://www.instagram.com/melanatedinmelbourne/'},
-tag9:{label:'Community Events',prompt:'What type of events do you want more of?',formUrl:'https://forms.gle/Bw4Gwf3yB6bQ95WP8'},
-tag10:{label:'To Be Loved',prompt:'Ri\'chard and Adam welcome Alison to the booth and they dive into the complexities of dating in Australia, especially from the perspective of Black and Brown expats.',episodeUrl:'https://open.spotify.com/episode/4OGs7XIUsJrMwwEQydhZiT?si=e6b34fb781a74052'},
-tag11:{label:'No Nutbush November',prompt:'Ri\'chard and Nicole discuss the myths, stigmas, and advancements related to HIV and AIDS with their special guest, Dr. Hans.',episodeUrl:'https://open.spotify.com/episode/4yt7R2y10fgPwVP7BfjzWx?si=606c627299b1485d'},
-tag12:{label:'Expand the circle',prompt:'Invite someone standing alone to join your conversation.'},
-tag13:{label:'Make a connection',prompt:'Introduce two people who haven’t met yet.'},
-tag14:{label:'Capture a moment',prompt:'Take a photo - a selfie, with a new friend or anything you like!'},
-tag15:{label:'Ask someone',prompt:'Which performer are you most excited to see tonight?.'}
-};
-
-/* 3x3 state */
-const STORAGE_KEY='mim_bingo_v8_3x3';
-let state=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{"collected":[],"layout":[],"bingoLogged":false}');
-const allKeys=Object.keys(ALL_TAGS);
-
-if(!state.layout || state.layout.length!==9){
-  state.layout = shuffle(allKeys).slice(0,9);
-  state.collected=[];
-  state.bingoLogged=false;
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
-  sendLog({event:'board_created',tagId:null});
-}
-
-const TAGS={};
-state.layout.forEach(k=>TAGS[k]=ALL_TAGS[k]);
-
-@@ -223,79 +120,7 @@
-
-if (tagParam) {
-  if (TAGS[tagParam]) {
-    if (!state.collected.includes(tagParam)) {
-      state.collected.push(tagParam);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      sendLog({ event: 'tag_unlocked', tagId: tagParam });
+  /* stable player identity */
+  function getPlayerName(){
+    let n = localStorage.getItem('mim_player_name');
+    if(!n){
+      n = prompt("Enter your name (first name or nickname):") || "Guest";
+      localStorage.setItem('mim_player_name', n);
     }
+    return n;
+  }
+  function getOrCreateNameSuffix(){
+    let s = localStorage.getItem('mim_name_suffix');
+    if(!s){
+      s = String(Math.floor(Math.random()*1000));
+      localStorage.setItem('mim_name_suffix', s);
+    }
+    return s;
+  }
+  function makeStablePlayerId(name){
+    const base = String(name).toLowerCase().replace(/[^a-z0-9]/g,'') || 'guest';
+    return `player-${base}-${getOrCreateNameSuffix()}`;
+  }
 
-    const cfg = TAGS[tagParam];
-    let html = `<strong>✅ You unlocked: ${cfg.label}</strong><br>${cfg.prompt}`;
+  const playerName = getPlayerName();
+  const playerId   = makeStablePlayerId(playerName);
 
-if (cfg.episodeUrl || cfg.formUrl || cfg.instaUrl) {
-  const link =
-    cfg.episodeUrl ||
-    cfg.formUrl ||
-    cfg.instaUrl;
+  function sendLog(p){
+    try{
+      fetch(TRACKING_URL,{
+        method:'POST',
+        mode:'no-cors',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({...p, playerName, playerId})
+      });
+    }catch(e){}
+  }
 
-  const label = cfg.episodeUrl
-    ? "Listen on Spotify"
-    : cfg.formUrl
-    ? "Let us know here"
-    : "MiM Instagram";
+  /* tags (UNCHANGED) */
+  const ALL_TAGS={
+    tag1:{label:'Volunteer',prompt:'Congrats! You found a volunteer.'},
+    tag2:{label:'Meet Someone New',prompt:'Congrats! You found a newbie.'},
+    tag3:{label:'Gqom Girl',prompt:'50th episode! Nicole and Ri\'chard dressed like senior citizens to chat with Chrissy aka Mothafunk.',episodeUrl:'https://open.spotify.com/episode/7bkqqPhmVyCqX4uOSMGuIT?si=ec4c509b098c49fc'},
+    tag4:{label:'Share a Goal',prompt:'Tell someone about a goal you’re working toward.'},
+    tag5:{label:'Make a New Friend',prompt:'Congrats! You found a new friend.'},
+    tag6:{label:'Stories We Need',prompt:'What kind of stories do you wish you heard more often - in media or real life?',formUrl:'https://forms.gle/w73o1BtQ3H3ZBz3L6'},
+    tag7:{label:'Grounded Space',prompt:'Pause and take a breath.'},
+    tag8:{label:'Follow Us!',prompt:'Stay connected with us on Instagram!',instaUrl:'https://www.instagram.com/melanatedinmelbourne/'},
+    tag9:{label:'Community Events',prompt:'What type of events do you want more of?',formUrl:'https://forms.gle/Bw4Gwf3yB6bQ95WP8'},
+    tag10:{label:'To Be Loved',prompt:'Ri\'chard and Adam welcome Alison to the booth and they dive into the complexities of dating in Australia, especially from the perspective of Black and Brown expats.',episodeUrl:'https://open.spotify.com/episode/4OGs7XIUsJrMwwEQydhZiT?si=e6b34fb781a74052'},
+    tag11:{label:'No Nutbush November',prompt:'Ri\'chard and Nicole discuss the myths, stigmas, and advancements related to HIV and AIDS with their special guest, Dr. Hans.',episodeUrl:'https://open.spotify.com/episode/4yt7R2y10fgPwVP7BfjzWx?si=606c627299b1485d'},
+    tag12:{label:'Expand the circle',prompt:'Invite someone standing alone to join your conversation.'},
+    tag13:{label:'Make a connection',prompt:'Introduce two people who haven’t met yet.'},
+    tag14:{label:'Capture a moment',prompt:'Take a photo - a selfie, with a new friend or anything you like!'},
+    tag15:{label:'Ask someone',prompt:'Which performer are you most excited to see tonight?.'}
+  };
 
-  html += `<br><a href="${link}" target="_blank" class="mim-button">${label}</a>`;
-}
+  /* 3x3 state */
+  const STORAGE_KEY='mim_bingo_v8_3x3';
+  let state=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{"collected":[],"layout":[],"bingoLogged":false}');
+  const allKeys=Object.keys(ALL_TAGS);
 
-    messageEl.innerHTML = html;
+  if(!state.layout || state.layout.length!==9){
+    state.layout = shuffle(allKeys).slice(0,9);
+    state.collected=[];
+    state.bingoLogged=false;
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
+    sendLog({event:'board_created',tagId:null});
+  }
+
+  const TAGS={};
+  state.layout.forEach(k=>TAGS[k]=ALL_TAGS[k]);
+
+  /* scan handling */
+  const params = new URLSearchParams(window.location.search);
+  const tagParam = (params.get('tag') || '').trim();
+  const messageEl = document.getElementById('message');
+  const grid = document.getElementById('bingo-grid');
+  const reward = document.getElementById('reward');
+
+  if (tagParam) {
+    if (TAGS[tagParam]) {
+      if (!state.collected.includes(tagParam)) {
+        state.collected.push(tagParam);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        sendLog({ event: 'tag_unlocked', tagId: tagParam });
+      }
+
+      const cfg = TAGS[tagParam];
+      let html = `<strong>✅ You unlocked: ${cfg.label}</strong><br>${cfg.prompt}`;
+
+      if (cfg.episodeUrl || cfg.formUrl || cfg.instaUrl) {
+        const link = cfg.episodeUrl || cfg.formUrl || cfg.instaUrl;
+
+        const label = cfg.episodeUrl
+          ? "Listen on Spotify"
+          : cfg.formUrl
+          ? "Let us know here"
+          : "MiM Instagram";
+
+        html += `<br><a href="${link}" target="_blank" class="mim-button">${label}</a>`;
+      }
+
+      messageEl.innerHTML = html;
+    } else {
+      messageEl.innerHTML =
+        `<strong>Not on your board, that’s okay!</strong><br>` +
+        `Say hello to someone nearby and keep exploring.`;
+      sendLog({ event: 'tag_not_on_board', tagId: tagParam });
+    }
   } else {
-    messageEl.innerHTML =
-      `<strong>Not on your board, that’s okay!</strong><br>` +
-      `Say hello to someone nearby and keep exploring.`;
-    sendLog({ event: 'tag_not_on_board', tagId: tagParam });
+    messageEl.textContent = 'Tap or scan to fill your 3×3 Bingo board!';
   }
-} else {
-  messageEl.textContent = 'Tap or scan to fill your 3×3 Bingo board!';
-}
 
+  renderBoard();
+  checkBingo();
 
-renderBoard();
-checkBingo();
+  /* render */
+  function renderBoard(){
+    grid.innerHTML='';
+    grid.style.gridTemplateColumns='repeat(3,1fr)';
+    Object.entries(TAGS).forEach(([id,cfg])=>{
+      const sq=document.createElement('div');
+      sq.className='square'+(state.collected.includes(id)?' filled':'');
+      sq.textContent=cfg.label;
+      grid.appendChild(sq);
+    });
+  }
 
-/* render */
-function renderBoard(){
-  grid.innerHTML='';
-  grid.style.gridTemplateColumns='repeat(3,1fr)';
-  Object.entries(TAGS).forEach(([id,cfg])=>{
-    const sq=document.createElement('div');
-    sq.className='square'+(state.collected.includes(id)?' filled':'');
-    sq.textContent=cfg.label;
-    grid.appendChild(sq);
-  });
-}
-
-/* bingo logic */
-function checkBingo(){
-  const f=state.collected;
-  const ids=Object.keys(TAGS);
-  const b=[ids.slice(0,3),ids.slice(3,6),ids.slice(6,9)];
-  const win =
-    b.some(r=>r.every(i=>f.includes(i))) ||
-    [0,1,2].some(c=>b.every(r=>f.includes(r[c]))) ||
-    b.every((r,i)=>f.includes(r[i])) ||
-    b.every((r,i)=>f.includes(r[2-i]));
-  if(win){
-    reward.style.display='block';
-    if(!state.bingoLogged){
-      state.bingoLogged=true;
-      localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
-      sendLog({event:'bingo_completed',tagId:null});
+  /* bingo logic */
+  function checkBingo(){
+    const f=state.collected;
+    const ids=Object.keys(TAGS);
+    const b=[ids.slice(0,3),ids.slice(3,6),ids.slice(6,9)];
+    const win =
+      b.some(r=>r.every(i=>f.includes(i))) ||
+      [0,1,2].some(c=>b.every(r=>f.includes(r[c]))) ||
+      b.every((r,i)=>f.includes(r[i])) ||
+      b.every((r,i)=>f.includes(r[2-i]));
+    if(win){
+      reward.style.display='block';
+      if(!state.bingoLogged){
+        state.bingoLogged=true;
+        localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
+        sendLog({event:'bingo_completed',tagId:null});
+      }
     }
   }
-}
 
-function shuffle(a){
-  return a.map(v=>({v,r:Math.random()})).sort((a,b)=>a.r-b.r).map(o=>o.v);
-}
+  function shuffle(a){
+    return a.map(v=>({v,r:Math.random()})).sort((a,b)=>a.r-b.r).map(o=>o.v);
+  }
 })();
 </script>
-const TAGS={};
-state.layout.forEach(k=>TAGS[k]=ALL_TAGS[k]);
 
-/* scan handling */
-/* scan handling */
-const params = new URLSearchParams(window.location.search);
-const tagParam = (params.get('tag') || '').trim();
-const messageEl = document.getElementById('message');
-const grid = document.getElementById('bingo-grid');
-const reward = document.getElementById('reward');
-
-if (tagParam) {
-  if (TAGS[tagParam]) {
-
-}
-})();
-</script>
 </body>
 </html>
